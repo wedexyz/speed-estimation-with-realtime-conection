@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>smart camera</title>
+    <link rel="shortcut icon" href="bwi.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body > 
+
+<div class="header">
+    <h1>Speed kamera<button onclick="load_webcam()">klik memulai</button></h1>
+    <li>model      : <input  id="model"style="background-color: transparent;color:yellow"></li>
+  </div>
+  
+  <div class="row" >
+    <div class="col-3 col-s-3 menu">
+      <div class="aside">
+      <ul>
+        <li>Lebar      : <input  id="lebar"style="background-color: transparent;color:yellow"></li>
+        <li>Tinggi     : <input id="tinggi"style="background-color: transparent;color:yellow"></li>
+        <li>Deteksi    : <input id="hasil"style="background-color: transparent;color:yellow"> </li>
+        <li>Prediksi   : <input id="myInput"style="background-color: transparent;color:yellow" ></li>
+        <li>speed1     : <input  id="cepat1"style="background-color: transparent;color:yellow"></li>
+        <li>speed2     : <input  id="cepat2"style="background-color: transparent;color:yellow"></li>
+        <li>speed3     : <input  id="cepat3"style="background-color: transparent;color:yellow"></li>
+        <li>koneksi    : <input  id="hubung"style="background-color: transparent;color:yellow"></li>
+        
+      </ul>
+    </div>
+  </div>
+    <div class="col-5 col-s-9"  > 
+    
+      <canvas id="canvas" style="width: 500px;height:400px;background-image: url(/car.gif);background-repeat: no-repeat;background-position: center; background-size: cover;"></canvas>
+      <video id="localVideo" autoplay style="display: none"></video>
+      <video id="remoteVideo" autoplay style="display: none"> </video>       
+    </div>
+  
+    <div class="col-4 col-s-3 menu">
+      <div class="aside">
+        <ul>
+
+        <li>line 1       : <input  id="speed1"style="background-color: transparent;color:yellow"></li>
+        <li>zona1        : <input  id="zona1"style="background-color: transparent;color:yellow"></li>
+        <li>timer1       : <input  id="txt1" style="background-color: transparent;color:yellow"> </li>
+          
+        <li>line 2        : <input  id="speed2"style="background-color: transparent;color:yellow"></li>
+        <li>zona2         : <input  id="zona2"style="background-color: transparent;color:yellow"></li>
+        <li>timer2        : <input  id="txt2" style="background-color: transparent;color:yellow" > </li>
+
+        <li>line 3       : <input  id="speed3"style="background-color: transparent;color:yellow"></li>
+        <li>zona3        : <input  id="zona3"style="background-color: transparent;color:yellow"></li>
+        <li>timer3       : <input  id="txt3" style="background-color: transparent;color:yellow" > </li>
+
+       
+      </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <p>testing speed camera
+   
+    </p>
+  </div>
+
+
+
+<script src="/wrtc/jquery-3.2.1.slim.min.js"></script>
+<script src="wrtc/scale.min.js"></script>
+<script src="/wrtc/wrtc.js"></script>
+<script src="tf/tfjs.min.js"> </script>
+<script src="tf/coco.min.js"> </script>
+<script src="tfjs-multi-obj-det.js"></script>
+<script src="/firebase/firebase.js"></script>
+<script>
+var firebaseConfig = {
+databaseURL: "https://absensi2020face.firebaseio.com/",
+};
+firebase.initializeApp(firebaseConfig);
+var dbRef = firebase.database();
+
+var speed1 = document.getElementById('speed1');
+var speed2 = document.getElementById('speed2');
+var speed3 = document.getElementById('speed3');
+
+
+
+dbRef.ref("/speed").child('data1').on('value', snap => speed1.value= snap.val());
+dbRef.ref("/speed").child('data2').on('value', snap => speed2.value= snap.val());
+dbRef.ref("/speed").child('data3').on('value', snap => speed3.value= snap.val());
+
+</script>
+
+</body>
+</html>
